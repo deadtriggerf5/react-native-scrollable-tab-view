@@ -255,9 +255,11 @@ class ScrollableTabView extends Component {
     const {width} = e.nativeEvent.layout
     if (Math.round(width) !== Math.round(this.state.containerWidth)) {
       this.setState({containerWidth: width})
-      this.requestAnimationFrame(() => {
-        this.goToPage(this.state.currentPage)
-      })
+      if(typeof this.requestAnimationFrame === 'function'){
+        this.requestAnimationFrame(() => {
+          this.goToPage(this.state.currentPage)
+        })
+      }
     }
   }
 
